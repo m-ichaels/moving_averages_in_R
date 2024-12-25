@@ -4,26 +4,32 @@ library(TTR)
 library(ggplot2)
 library(scales)
 
+# download stock data
 download <-function(stock,from="2010-01-01"){
 	df<-getSymbols(stock,from=from,env=environment(),auto.assign=FALSE)
 	names(df)<-c("Open","High","Low","Close","Volume","Adjusted")
 	write.zoo(df,file=paste(stock,".csv",sep=""),sep=",",quote=FALSE)
 	}
 
+# read stock data from CSV
 read <-function(stock){  
 	as.xts(read.zoo(file=paste(stock,".csv",sep=""),header = TRUE,sep=",", format="%Y-%m-%d"))
 }
 
+# download and read IBM stock data
 stock <- "IBM"
 download(stock,from="2010-01-01")
 IBM <- read(stock)
 
+# inspect data
 class(IBM)
 head(IBM)
 
+# chart stock data
 chartSeries(IBM)
 chartSeries(IBM,TA = "addVo(); addSMA(); addEnvelope();addMACD(); addROC()")
 
+# calculate moving averages
 ma <- function(cdata, mas = c(5,20,60))
 {
 	ldata <- cdata
@@ -36,6 +42,7 @@ ma <- function(cdata, mas = c(5,20,60))
 	return(ldata)
 }
 
+# plot moving averages
 drawLine <- function(ldata, title = "Stock_MA", sData = min(index(ldata))
 	,eDate = max(index(ldata)), out = FALSE)
 {
@@ -49,6 +56,7 @@ drawLine <- function(ldata, title = "Stock_MA", sData = min(index(ldata))
 	else g
 }	
 
+# calculate moving averages and plot
 cdata <- IBM[,"Close"]
 ldata  <- ma(cdata, c(5,30,60))
 title <- "Stock IBM"
