@@ -84,3 +84,21 @@ drawLine(ldata, title, sDate, eDate)
 drawLine(ldata, title, sDate, eDate, out = TRUE)
 ```
 
+## Sample Output
+
+### Stock Price Chart with Indicators
+
+- The `chartSeries()` function generates a candlestick chart with added volume, SMA, envelopes, MACD, and ROC.
+
+### Moving Average Plot
+
+- The `drawLine()` function produces a clean plot of stock prices and moving averages using `ggplot2`.
+
+### Notes
+
+- The script is designed for demonstration purposes and may require adjustments for real-world use cases.
+- The data is sourced from Yahoo Finance via the `quantmod` package, and its accuracy depends on the availability and reliability of Yahoo Finance.
+
+### License
+
+- This code is provided as-is, without any warranty. You are free to use it for educational purposes.
